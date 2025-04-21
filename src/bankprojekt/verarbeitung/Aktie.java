@@ -24,7 +24,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Aktie {
 	
 	private static Map<String, Aktie> alleAktien = new HashMap<>();
-	private String wkn;
+	private String wkn; 												// Wertepapierkennnummer
 	private double kurs;
 	private Condition kursHoch;
 	private Condition kursRunter;

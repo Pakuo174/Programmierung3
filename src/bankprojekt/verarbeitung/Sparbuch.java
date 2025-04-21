@@ -1,7 +1,7 @@
 package bankprojekt.verarbeitung;
 
 import java.time.LocalDate;
-import bankprojekt.nuetzliches.Kalender;
+import bankprojekt.verarbeitung.Kalender;
 
 /**
  * ein Sparbuch, d.h. ein Konto, das nur recht eingeschränkt genutzt

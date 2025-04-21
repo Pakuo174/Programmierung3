@@ -1,5 +1,7 @@
 package bankprojekt.verarbeitung;
 
+import bankprojekt.geld.Waehrung;
+
 /**
  * stellt ein allgemeines Bank-Konto dar
  */
@@ -222,5 +224,13 @@ public abstract class Konto implements Comparable<Konto>
         if(other.getKontonummer() < this.getKontonummer())
             return 1;
         return 0;
+    }
+
+    /**
+     * wechseln der Währung die das Konto aktuell führt
+     * @param neu wechseln zu anderer WÄhrung
+     */
+    public void waehrungswechsel(Waehrung neu){
+        this.kontostand = this.kontostand.umrechnen(neu);
     }
 }

@@ -1,5 +1,7 @@
 package bankprojekt.verarbeitung;
 
+import bankprojekt.geld.Waehrung;
+
 /**
  * Ein Geldbetrag mit Währung
  */
@@ -11,7 +13,7 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	/**
 	 * Die Währung
 	 */
-	private String waehrung = "€";
+	private Waehrung waehrung;
 	
 	/**
 	 * 0 €
@@ -32,11 +34,111 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	}
 
 	/**
+	 * erstellt einen Geldbetrag
+	 * @param betrag Betrag in Euro
+	 * @param w ist die genutze Währung
+	 */
+	public Geldbetrag (double betrag, Waehrung w){
+		if(!Double.isFinite(betrag))
+			throw new IllegalArgumentException();
+		this.betrag = betrag;
+		this.waehrung = w;
+	}
+
+	/**
+	 * rechnet die Währungs des Geldbetrages in einen anderen um
+	 * @param zielwaehrung Währung in die umgerechnet werden soll
+	 * @return neues Geldbetrag Objekt mit umgerechnter Währung
+	 */
+	public Geldbetrag umrechnen(Waehrung zielwaehrung){
+
+			double newBetrag = 0;
+
+			// Wenn die Ausgangswährung EUR ist, werden die Umrechnungslogiken für alle Zielwährungen implementiert
+			if (this.waehrung == Waehrung.EUR) {
+				switch (zielwaehrung) {
+					case ESCUDO:
+						newBetrag = this.betrag * 109.8269;
+						break;
+					case DOBRA:
+						newBetrag = this.betrag * 24304.7429;
+						break;
+					case FRANC:
+						newBetrag = this.betrag * 490.92;
+						break;
+					default:
+						throw new IllegalArgumentException("Unbekannte Zielwährung");
+				}
+			}
+			// Wenn die Ausgangswährung ESCUDO ist
+			else if (this.waehrung == Waehrung.ESCUDO) {
+				switch (zielwaehrung) {
+					case EUR:
+						newBetrag = this.betrag / 109.8269;
+						break;
+					case DOBRA:
+						newBetrag = (this.betrag / 109.8269) * 24304.7429;
+						break;
+					case FRANC:
+						newBetrag = (this.betrag / 109.8269) * 490.92;
+						break;
+					default:
+						throw new IllegalArgumentException("Unbekannte Zielwährung");
+				}
+			}
+			// Wenn die Ausgangswährung DOBRA ist
+			else if (this.waehrung == Waehrung.DOBRA) {
+				switch (zielwaehrung){
+					case EUR:
+					newBetrag = this.betrag / 24304.7429;
+					break;
+					case FRANC:
+						newBetrag = (this.betrag / 24304.7429) * 490.92;
+						break;
+					case ESCUDO:
+						newBetrag = (this.betrag / 24304.7429) * 109.8269;
+						break;
+					default:
+						throw new IllegalArgumentException("Unbekannte Zielwährung");
+				}
+			}
+			// Wenn die Ausgangswährung FRANC ist
+			else if (this.waehrung == Waehrung.FRANC) {
+				switch (zielwaehrung){
+					case EUR:
+						newBetrag = this.betrag / 490.92;
+						break;
+					case ESCUDO:
+						newBetrag = (this.betrag / 490.92) * 109.8269;
+						break;
+					case DOBRA:
+						newBetrag = (this.betrag / 490.92) * 24304.7429;
+						break;
+					default:
+						throw new IllegalArgumentException("Unbekannte Zielwährung");
+				}
+
+			}
+
+
+		// Setze den neuen Betrag und die Zielwährung
+			return new Geldbetrag(newBetrag, zielwaehrung);
+	}
+
+	/**
 	 * Betrag von this
 	 * @return Betrag in der Währung von this
 	 */
 	public double getBetrag() {
 		return betrag;
+	}
+
+	/**
+	 * Währung von this
+	 * @return währung von this
+	 */
+	public Waehrung getWaehrung(){
+		return this.waehrung;
 	}
 	
 	/**
@@ -99,10 +201,10 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	{
 		return this.betrag < 0;
 	}
-	
+
 	@Override
-	public String toString()
-	{
-		return String.format("%,.2f €", this.betrag);
+	public String toString() {
+		return String.format("%,.2f %s", this.betrag, this.waehrung.name());
 	}
+
 }
