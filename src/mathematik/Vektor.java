@@ -21,6 +21,9 @@ public class Vektor {
      * @param yKoor y-Komponente des Vektors
      */
     public Vektor(double xKoor, double yKoor){
+        if (!Double.isFinite(xKoor)|| !Double.isFinite(yKoor)){
+            throw new IllegalArgumentException();
+        }
         this.xKoor = xKoor;
         this.yKoor = yKoor;
     }
@@ -31,6 +34,11 @@ public class Vektor {
      * @param winkelXAchse Winkel zwischen Vektor und x-Achse (in Bogenmaß)
      */
     public Vektor (double laengeVektor, Winkel winkelXAchse ){
+        if (laengeVektor < 0|| Double.isFinite(laengeVektor)){
+            throw new IllegalArgumentException("Länge ist negativ !");}
+        if(winkelXAchse == null){
+            throw new IllegalArgumentException("Winkel ist null !");
+        }
         double rad = winkelXAchse.getWinkelImBogenmass();
         this.xKoor = laengeVektor * Math.cos(rad); // x = Betrag * cos(winkel)
         this.yKoor = laengeVektor * Math.sin(rad); // y = Betrag * sin(winkel)
@@ -74,12 +82,12 @@ public class Vektor {
     }
 
     // Getter für x-Koordinate
-    public double getxKoor() {
+    public double getXKoor() {
         return xKoor;
     }
 
     // Getter für y-Koordinate
-    public double getyKoor() {
+    public double getYKoor() {
         return yKoor;
     }
 
@@ -91,8 +99,8 @@ public class Vektor {
         double laenge = Math.sqrt(xKoor * xKoor + yKoor * yKoor); // Betrag berechnen
 
         return "Der Vektor hat folgende Eigenschaften : \n" +
-                "X-Koordinate       : " + getxKoor() + "\n" +
-                "Y-Koordinate       : " + getyKoor() + "\n" +
+                "X-Koordinate       : " + getXKoor() + "\n" +
+                "Y-Koordinate       : " + getYKoor() + "\n" +
                 "Länge des Vektors  : " + laenge + "\n";
     }
 }

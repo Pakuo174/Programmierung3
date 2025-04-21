@@ -13,8 +13,8 @@ public class VektorCompare {
     public static class BetragComparator implements Comparator<Vektor> {
         @Override
         public int compare(Vektor v1, Vektor v2) {
-            double betrag1 = Math.sqrt(v1.getxKoor() * v1.getxKoor() + v1.getyKoor() * v1.getyKoor());
-            double betrag2 = Math.sqrt(v2.getxKoor() * v2.getxKoor() + v2.getyKoor() * v2.getyKoor());
+            double betrag1 = Math.sqrt(v1.getXKoor() * v1.getXKoor() + v1.getYKoor() * v1.getYKoor());
+            double betrag2 = Math.sqrt(v2.getXKoor() * v2.getXKoor() + v2.getYKoor() * v2.getYKoor());
             return Double.compare(betrag1, betrag2); //  Methode, die -1, 0 oder 1 zurückgibt und somit sortiert und somit sortiert werden könnte
         }
     }
@@ -23,8 +23,8 @@ public class VektorCompare {
     public static class WinkelComparator implements Comparator<Vektor> {
         @Override
         public int compare(Vektor v1, Vektor v2) {
-            double winkel1 = Math.atan2(v1.getyKoor(), v1.getxKoor());
-            double winkel2 = Math.atan2(v2.getyKoor(), v2.getxKoor());
+            double winkel1 = Math.atan2(v1.getYKoor(), v1.getXKoor());
+            double winkel2 = Math.atan2(v2.getYKoor(), v2.getXKoor());
             return Double.compare(winkel2, winkel1); // Methode, die -1, 0 oder 1 zurückgibt und somit sortiert werden könnte
         }
     }
