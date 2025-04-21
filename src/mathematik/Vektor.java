@@ -37,7 +37,6 @@ public class Vektor {
     }
 
     /**
-     * Addiert einen weiteren Vektor zu diesem Vektor.
      * @param v der zu addierende Vektor
      * @return Neuer Vektor als Ergebnis der Addition
      */
@@ -46,7 +45,6 @@ public class Vektor {
     }
 
     /**
-     * Berechnet das Skalarprodukt dieses Vektors mit einem anderen Vektor.
      * @param v der zweite Vektor
      * @return Ergebnis des Skalarprodukts
      */
@@ -55,7 +53,6 @@ public class Vektor {
     }
 
     /**
-     * Liefert den inversen Vektor (entgegengesetzte Richtung).
      * @return Neuer Vektor mit negierten Komponenten
      */
     public Vektor inverserVektor(){
@@ -63,7 +60,6 @@ public class Vektor {
     }
 
     /**
-     * Berechnet einen Einheitsvektor, der orthogonal (senkrecht) zu diesem Vektor steht.
      * @return Orthogonaler Einheitsvektor
      */
     public Vektor orthogonalerEinheitsvektor(){
