@@ -1,5 +1,8 @@
 package bankprojekt.geld;
 
+/**
+ * Konstanten sind verschiedene Währungen - ausgehend von Euro werden die anderen Währungen betrachtet
+ */
 public enum Waehrung {
 
     EUR(1.0), // 1 EUR -> 1 EUR
@@ -7,25 +10,45 @@ public enum Waehrung {
     DOBRA(24304.7429), // 1 EUR = 24304.7429 Dobras
     FRANC(490.92); // 1 EUR = 490.92 Francs
 
-    double umrKursEUro; // Attribut für Umrechnungskurs in Euro
+    private double umrKursEuro; // Konstruktor, der den Wert speichert
 
+    /**
+     * Beispiel für Ausgabe der Umrechnungskurse
+     */
     public static void main(String[] args) {
-        // Beispiel für Ausgabe der Umrechnungskurse
+
         for (Waehrung waehrung : Waehrung.values()) {
-            System.out.println(waehrung.name() + ": 1 EUR = " + waehrung.getUmrKursEUro() + " " + waehrung.name());
+            System.out.println(waehrung.name() + ": 1 EUR = " + waehrung.getUmrKursEuro() + " " + waehrung.name());
         }
     }
 
-    // Konstruktor für Umrechnungskurs
-    Waehrung(double umrKursEUro) {
-        this.umrKursEUro = umrKursEUro;
+    /**
+     * Konstruktor für Umrechnungskurs
+     * @param umrKursEuro
+     */
+    Waehrung(double umrKursEuro) {
+        this.umrKursEuro = umrKursEuro;
     }
 
-    // Getter für den Umrechnungskurs zum Euro
-    public double getUmrKursEUro() {
-        return this.umrKursEUro;
+    /**
+     *  simpler Getter für den Umrechnungskurs zum Euro
+      * @return einfach nur den Wert umgerechnet zum 1 Euro
+     */
+    public double getUmrKursEuro() {
+
+        return this.umrKursEuro;
     }
 
+    /**
+     *
+     * @param zielw soll die Währung sein, in die umgerechet wird
+     * @return gewünschte Währung, indem zielw durch momentane Währung geteilt wird
+     */
+    public double getNewWährung(Waehrung zielw){
+        if (zielw == null)
+            throw new IllegalArgumentException("Zielwährung darf nicht null sein");
+        return zielw.umrKursEuro / this.umrKursEuro;
+    }
 
 }
 
