@@ -231,6 +231,9 @@ public abstract class Konto implements Comparable<Konto>
      * @param neu wechseln zu anderer WÄhrung
      */
     public void waehrungswechsel(Waehrung neu){
+       if (neu == null)
+           throw new IllegalArgumentException();
+
         this.kontostand = this.kontostand.umrechnen(neu);
     }
 }

@@ -31,6 +31,7 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 		if(!Double.isFinite(betrag))
 			throw new IllegalArgumentException();
 		this.betrag = betrag;
+		// this(betrag, Waehrung.EUR);
 	}
 
 	/**
@@ -52,7 +53,10 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	 */
 	public Geldbetrag umrechnen(Waehrung zielwaehrung){
 
-			double newBetrag = 0;
+		if (zielwaehrung == null)
+			throw new IllegalArgumentException();
+
+		double newBetrag = 0;
 
 			// Wenn die Ausgangswährung EUR ist, werden die Umrechnungslogiken für alle Zielwährungen implementiert
 			if (this.waehrung == Waehrung.EUR) {
